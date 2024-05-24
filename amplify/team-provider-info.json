@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-mysimplesocial-dev-8211d-authRole",
+      "UnauthRoleArn": "arn:aws:iam::975050378631:role/amplify-mysimplesocial-dev-8211d-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::975050378631:role/amplify-mysimplesocial-dev-8211d-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-mysimplesocial-dev-8211d-deployment",
+      "UnauthRoleName": "amplify-mysimplesocial-dev-8211d-unauthRole",
+      "StackName": "amplify-mysimplesocial-dev-8211d",
+      "StackId": "arn:aws:cloudformation:us-west-2:975050378631:stack/amplify-mysimplesocial-dev-8211d/891c82a0-19a5-11ef-860a-0a92ed9d6b51",
+      "AmplifyAppId": "dwil3gv2p7yql"
+    },
+    "categories": {
+      "api": {
+        "mysimplesocial": {}
+      }
+    }
+  }
+}
