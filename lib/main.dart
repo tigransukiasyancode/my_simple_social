@@ -19,49 +19,33 @@ class HomeScreen extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('First Item'),
-                IconButton(
-                  onPressed: () {
-                    print('First Item');
-                  },
-                  icon: Icon(Icons.comment_rounded),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Second Item'),
-                IconButton(
-                    onPressed: () {
-                      print('Second Item');
-                    },
-                    icon: Icon(Icons.comment_rounded))
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Third Item'),
-                IconButton(
-                  onPressed: () {
-                    print('Third Item');
-                  },
-                  icon: Icon(Icons.comment_rounded),
-                ),
-              ],
-            ),
+          PostWidget(text: 'First Item'),
+          PostWidget(text: 'Second Item'),
+          PostWidget(text: 'Third Item'),
+        ],
+      ),
+    );
+  }
+}
+
+class PostWidget extends StatelessWidget {
+  PostWidget({
+    required this.text,
+  });
+  String text;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(text),
+          IconButton(
+            onPressed: () {
+              print(text);
+            },
+            icon: Icon(Icons.comment_rounded),
           ),
         ],
       ),
