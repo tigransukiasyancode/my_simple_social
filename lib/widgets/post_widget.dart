@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_simple_social/models/comment_dao.dart';
+
+import '../models/Comment.dart';
 
 class PostWidget extends StatefulWidget {
   PostWidget({
@@ -22,30 +25,18 @@ class _PostWidgetState extends State<PostWidget> {
           Text(widget.text, style: TextStyle(fontSize: 20)),
           IconButton(
             onPressed: () {
-              showModalBottomSheet(context: context, builder: (context) {
-                // TODO 5. Extract this container into a stateful CommentsWidget
-                // TODO 6. In initState of the CommentsWidgetState call listComments
-                // TODO 7. In the CommentsWidgetState build method, modify the children of the Column widget to contain the results returned by the listComments (don't forget about setState)
-                return Container(
-                  height: 200,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text("Comment 1"),
-                        Text("Comment 2"),
-                        Text("Comment 3"),
-                      ],
-                    ),
-                  ),
-                );
-              });
+              showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return CommentsWidget();
+                  });
               setState(() {
                 isCommentPressed = !isCommentPressed;
               });
             },
-            icon: Icon(isCommentPressed ? Icons.comment_rounded : Icons.comment_outlined),
+            icon: Icon(isCommentPressed
+                ? Icons.comment_rounded
+                : Icons.comment_outlined),
           ),
         ],
       ),
@@ -53,3 +44,36 @@ class _PostWidgetState extends State<PostWidget> {
   }
 }
 
+class CommentsWidget extends StatefulWidget {
+  const CommentsWidget();
+
+  @override
+  State<CommentsWidget> createState() => _CommentsWidgetState();
+}
+
+class _CommentsWidgetState extends State<CommentsWidget> {
+  List<Comment> comments = [];
+  @override
+  void initState() {
+    super.initState();
+    CommentDao().listComments().then((value) {
+      setState(() {
+        comments = value;
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 200,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: comments.map((comment) => Text(comment.content)).toList(),
+        ),
+      ),
+    );
+  }
+}
