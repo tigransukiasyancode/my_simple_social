@@ -67,16 +67,18 @@ class _CommentsWidgetState extends State<CommentsWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: comments.map((comment) => Text(comment.content)).toList(),
+        Expanded(
+          child: Container(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: comments.map((comment) => Text(comment.content)).toList(),
+              ),
             ),
           ),
         ),
-        TextField()
+        TextField(decoration: InputDecoration (border: OutlineInputBorder()),),
       ],
     );
   }
