@@ -8,6 +8,10 @@ void main() {
   testWidgets('Test PostWidget', (WidgetTester tester) async {
     await pumpWidget(tester, PostWidget(text: "test"));
     expect(find.text('test'), findsOneWidget);
+    final iconFinder = find.byIcon(Icons.comment_outlined);
+    expect(iconFinder, findsOneWidget);
+    await tester.tap(iconFinder);
+    await tester.pumpAndSettle();
     expect(find.byIcon(Icons.comment_rounded), findsOneWidget);
   });
 }
