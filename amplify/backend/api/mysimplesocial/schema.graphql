@@ -4,3 +4,7 @@ type Post @model
   id: ID!
   content: String!
 }
+
+# TODO 1. Add the Comment model with the @model and @auth directives
+# TODO 2. run amplify push
+# TODO 3. run amplify codegen models

@@ -23,6 +23,9 @@ class _PostWidgetState extends State<PostWidget> {
           IconButton(
             onPressed: () {
               showModalBottomSheet(context: context, builder: (context) {
+                // TODO 5. Extract this container into a stateful CommentsWidget
+                // TODO 6. In initState of the CommentsWidgetState call listComments
+                // TODO 7. In the CommentsWidgetState build method, modify the children of the Column widget to contain the results returned by the listComments (don't forget about setState)
                 return Container(
                   height: 200,
                   child: Padding(
