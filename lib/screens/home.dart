@@ -2,18 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:my_simple_social/models/post_dao.dart';
 import '../widgets/post_widget.dart';
 
-class HomeScreen extends StatelessWidget {
+
+
+class HomeScreen extends StatefulWidget {
   HomeScreen({required this.title});
   String title;
-  List<String> posts = ['First Item', 'Second Item', 'Third Item'];
+
   @override
-  Widget build(BuildContext context) {
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  List<String> posts = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
     PostDao().listPosts().then((value) {
       print(value);
+      setState(() {
+        posts = value!.nonNulls.map((e) => e.content).toList();
+      });
     });
+  }
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(widget.title),
       ),
       body: ListView.builder(
         itemCount: posts.length,
