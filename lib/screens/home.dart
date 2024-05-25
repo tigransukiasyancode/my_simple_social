@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_simple_social/models/post_dao.dart';
 import '../widgets/post_widget.dart';
+import 'add_post.dart';
 
 
 
@@ -41,7 +42,12 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
           ),
-          IconButton(onPressed: () {}, icon: Icon(Icons.add_box_outlined))
+          IconButton(onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AddPostScreen()),
+            );
+          }, icon: Icon(Icons.add_box_outlined))
         ],
       ),
     );
