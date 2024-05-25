@@ -1,5 +1,4 @@
 import 'package:amplify_flutter/amplify_flutter.dart';
-
 import 'Comment.dart';
 
 class CommentDao {

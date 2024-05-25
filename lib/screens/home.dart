@@ -31,11 +31,18 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: ListView.builder(
-        itemCount: posts.length,
-        itemBuilder: (context, index) {
-          return PostWidget(text: posts[index]);
-        },
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: posts.length,
+              itemBuilder: (context, index) {
+                return PostWidget(text: posts[index]);
+              },
+            ),
+          ),
+          IconButton(onPressed: () {}, icon: Icon(Icons.add_box_outlined))
+        ],
       ),
     );
   }

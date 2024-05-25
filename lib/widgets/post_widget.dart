@@ -65,15 +65,19 @@ class _CommentsWidgetState extends State<CommentsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 200,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: comments.map((comment) => Text(comment.content)).toList(),
+    return Column(
+      children: [
+        Container(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: comments.map((comment) => Text(comment.content)).toList(),
+            ),
+          ),
         ),
-      ),
+        TextField()
+      ],
     );
   }
 }
