@@ -16,7 +16,6 @@ class PostWidget extends StatefulWidget {
 }
 
 class _PostWidgetState extends State<PostWidget> {
-  bool isCommentPressed = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,13 +31,8 @@ class _PostWidgetState extends State<PostWidget> {
                   builder: (context) {
                     return CommentsWidget(commentPostId:  widget.post.id);
                   });
-              setState(() {
-                isCommentPressed = !isCommentPressed;
-              });
             },
-            icon: Icon(isCommentPressed
-                ? Icons.comment_rounded
-                : Icons.comment_outlined),
+            icon: Icon(Icons.comment_rounded),
           ),
         ],
       ),
