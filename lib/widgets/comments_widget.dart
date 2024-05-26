@@ -17,7 +17,7 @@ class _CommentsWidgetState extends State<CommentsWidget> {
   @override
   void initState() {
     super.initState();
-    CommentDao().listComments().then((value) {
+    CommentDao().listComments(widget.commentPostId).then((value) {
       setState(() {
         comments = value;
       });

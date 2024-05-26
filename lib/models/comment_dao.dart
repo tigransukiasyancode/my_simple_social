@@ -2,11 +2,11 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'Comment.dart';
 
 class CommentDao {
-  Future<List<Comment>> listComments() async {
+  Future<List<Comment>> listComments(String commentPostId) async {
     const listComments = 'listComments';
     const graphQLDocument = '''
-    query MyQuery {
-        listComments {
+    query MyQuery( \$commentPostId: ID!) {
+         listComments(filter: {commentPostId: {eq: \$commentPostId}}) {
           items {
             content
             id
@@ -16,6 +16,9 @@ class CommentDao {
     ''';
     final getCommentRequest = GraphQLRequest<PaginatedResult<Comment>>(
       document: graphQLDocument,
+      variables: <String, String>{
+        'commentPostId': commentPostId,
+      },
       modelType: PaginatedModelType(Comment.classType),
       decodePath: listComments,
     );
