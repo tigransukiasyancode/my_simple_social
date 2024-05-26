@@ -1,13 +1,14 @@
 type Post @model
           @auth(rules: [{allow: public, operations: [read, create, delete, update]}])
 {
-  id: ID!
-  content: String!
+    id: ID!
+    content: String!
 }
 
 type Comment @model
              @auth(rules: [{allow: public, operations: [read, create, delete, update]}])
 {
-  id: ID!
-  content: String!
+    id: ID!
+    content: String!
+    post: Post @hasOne
 }

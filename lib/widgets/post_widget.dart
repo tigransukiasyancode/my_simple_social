@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:my_simple_social/models/comment_dao.dart';
 
 import '../models/Comment.dart';
+import '../models/Post.dart';
+import 'comments_widget.dart';
 
 class PostWidget extends StatefulWidget {
   PostWidget({
-    required this.text,
+    required this.post,
   });
-  String text;
+  Post post;
 
   @override
   State<PostWidget> createState() => _PostWidgetState();
@@ -22,13 +24,13 @@ class _PostWidgetState extends State<PostWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(widget.text, style: TextStyle(fontSize: 20)),
+          Text(widget.post.content, style: TextStyle(fontSize: 20)),
           IconButton(
             onPressed: () {
               showModalBottomSheet(
                   context: context,
                   builder: (context) {
-                    return CommentsWidget();
+                    return CommentsWidget(commentPostId:  widget.post.id);
                   });
               setState(() {
                 isCommentPressed = !isCommentPressed;
@@ -44,42 +46,3 @@ class _PostWidgetState extends State<PostWidget> {
   }
 }
 
-class CommentsWidget extends StatefulWidget {
-  const CommentsWidget();
-
-  @override
-  State<CommentsWidget> createState() => _CommentsWidgetState();
-}
-
-class _CommentsWidgetState extends State<CommentsWidget> {
-  List<Comment> comments = [];
-  @override
-  void initState() {
-    super.initState();
-    CommentDao().listComments().then((value) {
-      setState(() {
-        comments = value;
-      });
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: Container(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: comments.map((comment) => Text(comment.content)).toList(),
-              ),
-            ),
-          ),
-        ),
-        TextField(decoration: InputDecoration (border: OutlineInputBorder()),),
-      ],
-    );
-  }
-}

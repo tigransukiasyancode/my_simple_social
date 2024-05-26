@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_simple_social/models/post_dao.dart';
+import '../models/Post.dart';
 import '../widgets/post_widget.dart';
 import 'add_post.dart';
 
@@ -14,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<String> posts = [];
+  List<Post> posts = [];
 
   @override
   void initState() {
@@ -22,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     PostDao().listPosts().then((value) {
       print(value);
       setState(() {
-        posts = value!.nonNulls.map((e) => e.content).toList();
+        posts = value!.nonNulls.toList();
       });
     });
   }
@@ -38,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: ListView.builder(
               itemCount: posts.length,
               itemBuilder: (context, index) {
-                return PostWidget(text: posts[index]);
+                return PostWidget(post: posts[index]);
               },
             ),
           ),
