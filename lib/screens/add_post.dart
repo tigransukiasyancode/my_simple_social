@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../models/post_dao.dart';
+
 class AddPostScreen extends StatefulWidget {
   const AddPostScreen();
 
@@ -8,6 +10,8 @@ class AddPostScreen extends StatefulWidget {
 }
 
 class _AddPostScreenState extends State<AddPostScreen> {
+
+  String newPost = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,13 +24,17 @@ class _AddPostScreenState extends State<AddPostScreen> {
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
             child: TextField(
+              onChanged: (value) {
+                newPost = value;
+              },
               decoration: InputDecoration(
                 hintText: "What's on your mind?",
               ),
             ),
           ),
           ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
+              await PostDao().createPost(newPost);
               Navigator.pop(context);
             },
             child: Text("Post"),

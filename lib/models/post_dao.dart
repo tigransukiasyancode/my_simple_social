@@ -26,4 +26,26 @@ class PostDao {
     await Amplify.API.query(request: getPostRequest).response;
     return response.data?.items;
   }
+
+  Future<void> createPost(String newPost) async {
+    const createPost = 'createPost';
+    const graphQLDocument = '''
+    mutation MyMutation(\$content: String!) {
+        createPost(input: {content: \$content}) {
+          content
+          id
+        }
+    }
+    ''';
+    final createPostRequest = GraphQLRequest<Post>(
+      document: graphQLDocument,
+      variables: <String, String>{
+        'content': newPost,
+      },
+      decodePath: createPost,
+      modelType: Post.classType,
+    );
+    var result = await Amplify.API.mutate(request: createPostRequest).response;
+    print(result);
+  }
 }
